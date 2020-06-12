@@ -1,0 +1,146 @@
+
+{% extends("layout.html") %}
+{% block content %}
+        <header class="masthead">
+            <div class="container d-flex h-100 align-items-center">
+                <div class="mx-auto text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">DOXA</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5">Collectif d'Art Visuel Numérique et de transformation de biens recyclés.</h2>
+                    <a class="btn btn-primary js-scroll-trigger" href="#about">Appelez-nous</a>
+                </div>
+            </div>
+        </header>
+        <!-- About-->
+        <section class="about-section text-center" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="text-white mb-4">Présentation de l'association.</h2>
+                        <p class="text-white-50">DOXA est un collectif composé de techniciens et d'artistes qui créent toute sortes d'installations audiovisuelles à exposer ou pour mettre en scène des spectacles.</p>
+                    </div>
+                </div>
+                <img class="img-fluid" src="static/assets/img/ipad.png" alt="" />
+            </div>
+        </section>
+        <!-- Projects-->
+        <section class="projects-section bg-light" id="projects">
+            <div class="container">
+                <!-- Featured Project Row-->
+                <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="" /></div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="featured-text text-center text-lg-left">
+                            <h4>Les Projets</h4>
+                            <p class="text-black-50 mb-0">Basés sur Montpellier, nous faisons quotidiennement le tour des zones de débarras de la ville et ramenons à notre atelier ce qui est encore fonctionnel ou de la matière première. Dès que nous avons une commande ou une idée, nous nous affairons à la réaliser avec les fruits de nos récoltes.</p>
+                        </div>
+                    </div>
+                </div>
+                {% for i, project in enumerate(projects) %}
+
+                    {% if i == 0 %}
+                        {% for img in project.img.split(',') %}
+                            <div style="visibility: hidden;">{{imgs.append(img)}}</div>
+                        {% endfor %}
+
+                    <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                        <div class="col-lg-6"><a href="{{url_for('project', project_id=project.id)}}"><img class="img-fluid" src="static/assets/img/{{imgs[2]}}" alt="" /></a></div>
+                        <div class="col-lg-6">
+                            <div class="bg-black text-center h-100 project">
+                                <div class="d-flex h-100">
+                                    <div class="project-text w-100 my-auto text-center text-lg-left">
+                                        <a href="{{url_for('project', project_id=project.id)}}"><h4 class="text-white">{{project.title}}</h4></a>
+                                        <p class="mb-0 text-white-50">{{project.short_description}}</p>
+                                        <hr class="d-none d-lg-block mb-0 ml-0" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% elif (i % 2) == 0 %}
+                    <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                        <div class="col-lg-6"><a href="{{url_for('project', project_id=project.id)}}"><img class="img-fluid" src="{{url_for('static', filename='/assets/img/demo-image-01.jpg')}}" alt="" /></a></div>
+                        <div class="col-lg-6">
+                            <div class="bg-black text-center h-100 project">
+                                <div class="d-flex h-100">
+                                    <div class="project-text w-100 my-auto text-center text-lg-left">
+                                        <a href="{{url_for('project', project_id=project.id)}}"><h4 class="text-white">{{project.title}}</h4></a>
+                                        <p class="mb-0 text-white-50">{{project.description}}</p>
+                                        <hr class="d-none d-lg-block mb-0 ml-0" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="row justify-content-center no-gutters">
+                        <div class="col-lg-6"><a href="{{url_for('project', project_id=project.id)}}"><img class="img-fluid" src="{{url_for('static', filename='/assets/img/demo-image-01.jpg')}}" alt="" /></a></div>
+                        <div class="col-lg-6 order-lg-first">
+                            <div class="bg-black text-center h-100 project">
+                                <div class="d-flex h-100">
+                                    <div class="project-text w-100 my-auto text-center text-lg-right">
+                                        <a href="{{url_for('project', project_id=project.id)}}"><h4 class="text-white">{{project.title}}</h4></a>
+                                        <p class="mb-0 text-white-50">{{project.description}}</p>
+                                        <hr class="d-none d-lg-block mb-0 mr-0" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </section>
+        <!-- Signup-->
+        <section class="signup-section" id="signup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                        <h2 class="text-white mb-5">Côtisez à l'association en devenant membre du <a href="">CLOUD</a></h2>
+                        <form class="form-inline d-flex"><input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" type="email" placeholder="Enter email address..." /><button class="btn btn-primary mx-auto" type="submit">Subscribe</button></form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact-->
+        <section class="contact-section bg-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Addresse</h4>
+                                <hr class="my-4" />
+                                <div class="small text-black-50">4 Rue de la Verrerie, 34000 MONTPELLIER</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Email</h4>
+                                <hr class="my-4" />
+                                <div class="small text-black-50"><a href="#!">doxa.collectif@gmail.com</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                                <h4 class="text-uppercase m-0">Téléphone</h4>
+                                <hr class="my-4" />
+                                <div class="small text-black-50">+33 6131545</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social d-flex justify-content-center">
+                    <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
+{% endblock %}

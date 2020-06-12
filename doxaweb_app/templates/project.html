@@ -1,0 +1,33 @@
+{% extends("layout.html") %}
+{% block content %}
+<header style="background-color: grey; height: 80px;">
+
+</header>
+
+<section class="projects-section bg-light" id="projects">
+    <div class="container">
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+            <div class="col-lg-6"><img class="img-fluid" src="{{url_for('static', filename='assets/img/demo-image-01.jpg') }}" alt="" /></div>
+            <div class="col-lg-6">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-left">
+                            <h4 class="text-white">{{project.title}}</h4>
+                            <p class="mb-0 text-white-50">{{project.short_description}}</p>
+                            <hr class="d-none d-lg-block mb-0 ml-0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <p class="mb-0 text-black-50">{{project.description}}</p>
+    {% for img in project.img.split(',') %}
+    <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+        <div class="col-lg-6"><img class="img-fluid" src="{{url_for('static', filename='assets/img/' ~ img) }}" alt="" /></div>
+        <div class="col-lg-6">
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</section>
+{% endblock %}
